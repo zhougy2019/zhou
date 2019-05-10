@@ -13,6 +13,7 @@ git commit -a -m "完成"        //-a自动添加，-m增加备注
 git remote add origin https://gitee.com/hanzhichao/longteng15.git
 
 git push -u origin hanzhichao 将当前分支推送到orgin主机的对应分支
+git pull origin hanzhichao    将远程仓库的内容拉取下来
 
 输入账号密码
 
