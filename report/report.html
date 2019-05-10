@@ -1,0 +1,1867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="outline"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="detail"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "detail"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "outline"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1>测试报告</h1>
+<p class='attribute'><strong>Tester : </strong> QA</p>
+<p class='attribute'><strong>Start Time : </strong> 2019-05-10 10:12:35</p>
+<p class='attribute'><strong>Duration : </strong> 0:00:22.764303</p>
+<p class='attribute'><strong>Status : </strong> ALL 22 Error 22, Passing rate: 0.00%</p>
+
+<p class='description'>接口测试报告</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>Summary{ 0.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>Failed{ 0 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>Passed{ 0 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>ALL{ 22 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>test_query_fuel.TestQueryFuelCard</td>
+    <td class="text-center">22</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">22</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',22)" class="detail" id='c1'>Detail</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_01__1_0___证件类型是身份证____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____1___n_________idNumber____id101__n_______n_____cardInfo_____n_________cardNumber____000001__n______n_____delete_from_cardInfo_where__cardNumber___000001________code__5010__n_msg___绑定成功___n_result____UserId__2___n_success__true___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>error</button>
+    <div id='div_ft1_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>error</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003528358&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003528358&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003528358&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_02__2_0___证件类型是军官证____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____2___n_________idNumber____id201__n_______n_____cardInfo_____n_________cardNumber____000002__n______n___________n___code___5010__n___msg____绑定成功___n___result_____n_____UserId___3_n_____n___success___true_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x00000000035225C0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000035225C0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000035225C0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_03__3_0___首次绑卡_证件类型是护照_____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____3___n_________idNumber____id301__n_______n_____cardInfo_____n_________cardNumber____000003__n______n___________n___code___5010__n___msg____绑定成功___n___result_____n_____UserId___4_n_____n___success___true_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>error</button>
+    <div id='div_ft1_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>error</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre>
+    
+ft1_3: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003708748&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003708748&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003708748&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_04__4_0___首次绑卡_证件类型是驾驶证_____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____5___n_________idNumber____id501__n_______n_____cardInfo_____n_________cardNumber____000004__n______n___________n___code___5010__n___msg____绑定成功___n___result_____n_____UserId___5_n_____n___success___true_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>error</button>
+    <div id='div_ft1_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>error</button>
+    <div id='div_ft1_4' class="collapse in">
+    <pre>
+    
+ft1_4: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x00000000037120F0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037120F0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037120F0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_05__5_0___首次绑卡_证件类型是港澳通行证_台胞证_____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____7___n_________idNumber____id701__n_______n_____cardInfo_____n_________cardNumber____000005__n______n___________n___code___5010__n___msg____绑定成功___n___result_____n_____UserId___6_n_____n___success___true_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_5'>error</button>
+    <div id='div_ft1_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_5'>error</button>
+    <div id='div_ft1_5' class="collapse in">
+    <pre>
+    
+ft1_5: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003712A58&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003712A58&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003712A58&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_06__6_0___第二次绑卡不带userid____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____1___n_________idNumber____id101__n_______n_____cardInfo_____n_________cardNumber____000006__n______n___________n___code___5010__n___msg____绑定成功___n___result_____n_____UserId___2_n_____n___success___true_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_6'>error</button>
+    <div id='div_ft1_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_6'>error</button>
+    <div id='div_ft1_6' class="collapse in">
+    <pre>
+    
+ft1_6: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003720400&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003720400&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003720400&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_07__7_0___第二次绑卡带userid____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userId___2___n_________userName____zhougy___n_________idType___2___n_________idNumber___id201__n_______n_____cardInfo_____n_________cardNumber____000007__n______n___________n___code___5010__n___msg____绑定成功___n___result_____n_____UserId___7_n_____n___success___true_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_7'>error</button>
+    <div id='div_ft1_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_7'>error</button>
+    <div id='div_ft1_7' class="collapse in">
+    <pre>
+    
+ft1_7: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x00000000037129E8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037129E8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037129E8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_08__8_0___dataSourceId不存在____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJ___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___1___n_________idNumber___id101__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___100__n___msg____对不起_您的第三方机构无权限访问该接口___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_8'>error</button>
+    <div id='div_ft1_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_8'>error</button>
+    <div id='div_ft1_8' class="collapse in">
+    <pre>
+    
+ft1_8: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003712198&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003712198&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003712198&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_09__9_0___dataSourceId为空____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId_______n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___1___n_________idNumber___id101__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___301__n___msg____第三方平台ID不能为空____n___object_____n_____cardInfo_____n_______cardNumber____000009___n_______cardStatus___0__n_______userId___0_n_______n_____cardUser_____n_______gender___0__n_______idNumber____id101___n_______idType___1__n_______userId___0__n_______userName____zhougy__n_______n_____dataSourceId_______n_____methodId____01A__n_____n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_9'>error</button>
+    <div id='div_ft1_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_9'>error</button>
+    <div id='div_ft1_9' class="collapse in">
+    <pre>
+    
+ft1_9: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x00000000035223C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000035223C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000035223C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_10__10_0___methodId为空____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId_______n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___301__n___msg____业务ID不能为空____n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_10'>error</button>
+    <div id='div_ft1_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_10'>error</button>
+    <div id='div_ft1_10' class="collapse in">
+    <pre>
+    
+ft1_10: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003720A90&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003720A90&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003720A90&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_11__11_0___methodId不存在____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01E___n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___199__n___msg____业务ID无效___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_11'>error</button>
+    <div id='div_ft1_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_11'>error</button>
+    <div id='div_ft1_11' class="collapse in">
+    <pre>
+    
+ft1_11: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x00000000037133C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037133C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037133C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_12__12_0___userName为空____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01E___n_____cardUser_____n_________userName_______n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___301__n___msg____用户名称不能为空____n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_12'>error</button>
+    <div id='div_ft1_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_12'>error</button>
+    <div id='div_ft1_12' class="collapse in">
+    <pre>
+    
+ft1_12: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003713C88&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003713C88&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003713C88&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_13__13_0___idType为空____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType______n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000008__n______n___________n___code___5031__n___msg____证件类型不能为空____n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_13'>error</button>
+    <div id='div_ft1_13' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_13'>error</button>
+    <div id='div_ft1_13' class="collapse in">
+    <pre>
+    
+ft1_13: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003713CC0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003713CC0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003713CC0&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_14__14_0___idType不合法____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___abc___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___301__n___msg____参数类型错误com_alibaba_fastjson_JSONException__For_input_string_____abc______n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_14'>error</button>
+    <div id='div_ft1_14' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_14'>error</button>
+    <div id='div_ft1_14' class="collapse in">
+    <pre>
+    
+ft1_14: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003713240&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003713240&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003713240&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_15__15_0___idNumber为空____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber_____n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___301__n___msg____证件号不能为空____n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_15'>error</button>
+    <div id='div_ft1_15' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_15'>error</button>
+    <div id='div_ft1_15' class="collapse in">
+    <pre>
+    
+ft1_15: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003522438&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003522438&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003522438&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_16' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_16__16_0___cardNumber为空____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber______n______n___________n___code___301__n___msg____卡号不能为空____n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_16'>error</button>
+    <div id='div_ft1_16' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_16'>error</button>
+    <div id='div_ft1_16' class="collapse in">
+    <pre>
+    
+ft1_16: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x000000000372B860&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000000000372B860&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000000000372B860&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_17' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_17__17_0___cardNumber不存在____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____123456__n______n___________n___code___5013__n___msg____加油卡号不存在___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_17'>error</button>
+    <div id='div_ft1_17' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_17'>error</button>
+    <div id='div_ft1_17' class="collapse in">
+    <pre>
+    
+ft1_17: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003715198&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003715198&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003715198&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_18' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_18__18_0___加油卡处于黑名单状态____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000010__n______n___________n___code___5011__n___msg____卡号是否黑名单_无法绑定___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_18'>error</button>
+    <div id='div_ft1_18' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_18'>error</button>
+    <div id='div_ft1_18' class="collapse in">
+    <pre>
+    
+ft1_18: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003715A90&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003715A90&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003715A90&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_19' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_19__19_0___单位卡不支持绑定____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___3___n_________idNumber___id301__n_______n_____cardInfo_____n_________cardNumber____000012__n______n___________n___code___5021__n___msg____单位卡不支持_无法绑定___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_19'>error</button>
+    <div id='div_ft1_19' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_19'>error</button>
+    <div id='div_ft1_19' class="collapse in">
+    <pre>
+    
+ft1_19: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x00000000037123C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037123C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000000037123C8&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_20' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_20__20_0___重复绑定加油卡____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType____1___n_________idNumber____id101__n_______n_____cardInfo_____n_________cardNumber____000001__n______n___________n___code___5041__n___msg____卡已经被绑定_无法绑定___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_20'>error</button>
+    <div id='div_ft1_20' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_20'>error</button>
+    <div id='div_ft1_20' class="collapse in">
+    <pre>
+    
+ft1_20: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003715160&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003715160&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003715160&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_21' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_fuel_card_21__21_0___第三次绑卡____post____http___115_28_108_130_8080_gasStation_process__________n_____dataSourceId____YWJj___n_____methodId____01A___n_____cardUser_____n_________userName____zhougy___n_________idType___1___n_________idNumber___id101__n_______n_____cardInfo_____n_________cardNumber____000009__n______n___________n___code___5014__n___msg____每个用户只能绑定两张卡___n___success___false_n___</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_21'>error</button>
+    <div id='div_ft1_21' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_21' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_21'>error</button>
+    <div id='div_ft1_21' class="collapse in">
+    <pre>
+    
+ft1_21: http://115.28.108.130:8080/gasStation/process
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "E:\python\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "E:\python\lib\http\client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "E:\python\lib\http\client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "E:\python\lib\http\client.py", line 1026, in _send_output
+    self.send(msg)
+  File "E:\python\lib\http\client.py", line 964, in send
+    self.connect()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "E:\python\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPConnection object at 0x0000000003528978&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "E:\python\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "E:\python\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003528978&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 38, in test_add_fuel_card
+    res=requests.request(method,url,headers=header,json=data)
+  File "E:\python\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "E:\python\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "E:\python\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='115.28.108.130', port=8080): Max retries exceeded with url: /gasStation/process (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000000003528978&gt;: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_22' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_fule_card_normal</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_22' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_22'>error</button>
+    <div id='div_ft1_22' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_22' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_22'>error</button>
+    <div id='div_ft1_22' class="collapse in">
+    <pre>
+    
+ft1_22: Traceback (most recent call last):
+  File "E:\python学习\day06\test_case\test_query_fuel.py", line 24, in test_query_fule_card_normal
+    for case_data in self.case_list:
+AttributeError: 'TestQueryFuelCard' object has no attribute 'case_list'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>Total</td>
+    <td>22</td>
+    <td>0</td>
+    <td>0</td>
+    <td>22</td>
+    <td>Passing rate: 0.00%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>
