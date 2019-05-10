@@ -1,0 +1,20 @@
+git config --global user.name "hanzhichao"
+git config --global user.email "superhin@126.com"
+git init
+
+git checkout -b "你的名字拼音"  //新建分支
+
+git add .
+
+git commit -a -m "完成"        //-a自动添加，-m增加备注
+
+
+
+git remote add origin https://gitee.com/hanzhichao/longteng15.git
+
+git push -u origin hanzhichao 将当前分支推送到orgin主机的对应分支
+
+输入账号密码
+
+superhin@126.com
+hanzhichao123
